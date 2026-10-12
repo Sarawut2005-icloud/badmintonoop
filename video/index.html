@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Prompt"; font-weight: 400; src: url("assets/fonts/Prompt-Regular.ttf") format("truetype"); }
+      @font-face { font-family: "Prompt"; font-weight: 500; src: url("assets/fonts/Prompt-Medium.ttf") format("truetype"); }
+      @font-face { font-family: "Prompt"; font-weight: 600; src: url("assets/fonts/Prompt-SemiBold.ttf") format("truetype"); }
+      @font-face { font-family: "Prompt"; font-weight: 700; src: url("assets/fonts/Prompt-Bold.ttf") format("truetype"); }
+      @font-face { font-family: "Prompt"; font-weight: 800; src: url("assets/fonts/Prompt-ExtraBold.ttf") format("truetype"); }
+
+      :root {
+        --bg: #042a21;        /* เขียวมรกตเข้ม — สีเดียวกับแถบเมนูของแอป */
+        --panel: #073a2e;
+        --fg: #ecfdf5;
+        --muted: #a7d7c5;
+        --accent: #34d399;
+        --accent-deep: #059669;
+        --amber: #fbbf24;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+      #root { width: 100%; height: 100%; position: relative; font-family: "Prompt", sans-serif; color: var(--fg); }
+
+      /* ── พื้นหลังถาวร ── */
+      .bg { position: absolute; inset: 0; overflow: hidden; }
+      .glow { position: absolute; border-radius: 50%; display: block; }
+      .glow-a { width: 1100px; height: 1100px; left: -260px; top: -380px; background: radial-gradient(circle, rgba(52, 211, 153, 0.22), rgba(52, 211, 153, 0) 65%); }
+      .glow-b { width: 900px; height: 900px; right: -220px; bottom: -360px; background: radial-gradient(circle, rgba(251, 191, 36, 0.13), rgba(251, 191, 36, 0) 65%); }
+      .court { position: absolute; left: 290px; top: 235px; width: 1340px; height: 610px; display: block; }
+      .court path { fill: none; stroke: rgba(167, 243, 208, 0.16); stroke-width: 3; stroke-dasharray: 1; }
+
+      /* ── ฉาก ── */
+      .scene { position: absolute; inset: 0; }
+      .wrap { width: 100%; height: 100%; padding: 110px 130px; display: flex; flex-direction: column; }
+      .eyebrow { font-size: 28px; font-weight: 600; color: var(--accent); letter-spacing: 2px; display: block; }
+      h1 { font-size: 150px; font-weight: 800; line-height: 1.05; letter-spacing: -3px; }
+      h2 { font-size: 84px; font-weight: 700; line-height: 1.15; margin-top: 14px; }
+      .lead { font-size: 40px; font-weight: 400; color: var(--muted); margin-top: 22px; }
+      .pill { display: inline-block; padding: 14px 30px; border-radius: 999px; background: rgba(52, 211, 153, 0.14); border: 3px solid rgba(52, 211, 153, 0.5); font-size: 32px; font-weight: 600; color: var(--fg); }
+      .device { border-radius: 26px; overflow: hidden; border: 4px solid rgba(167, 243, 208, 0.35); box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45); background: #0b3b2f; }
+      .device img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .zoom { width: 100%; height: 100%; display: block; }
+
+      /* S1 */
+      #s1 .wrap { justify-content: center; }
+      .logo { width: 150px; height: 150px; border-radius: 36px; background: linear-gradient(135deg, #34d399, #047857); display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+      .logo svg { width: 96px; height: 96px; display: block; }
+      .chips { display: flex; gap: 22px; margin-top: 50px; }
+
+      /* ฉากที่เนื้อหาไม่เต็มจอ: จัดกึ่งกลางแนวตั้ง ไม่ให้ครึ่งล่างโล่ง */
+      #s2 .wrap, #s4 .wrap, #s7 .wrap { justify-content: center; }
+
+      /* S2 */
+      .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px; margin-top: 70px; }
+      .stat { background: var(--panel); border: 3px solid rgba(52, 211, 153, 0.35); border-radius: 30px; padding: 56px 40px; display: block; }
+      .stat .num { font-size: 104px; white-space: nowrap; font-weight: 800; line-height: 1; color: var(--accent); }
+      .stat .num.amber { color: var(--amber); }
+      .stat .label { font-size: 38px; font-weight: 600; margin-top: 22px; }
+      .stat .note { font-size: 28px; color: var(--muted); margin-top: 8px; }
+
+      /* S3 / S6 split */
+      .split { display: flex; gap: 70px; align-items: center; flex: 1; }
+      .split .device { width: 1080px; height: 687px; flex: none; }
+      .points { display: flex; flex-direction: column; gap: 34px; flex: 1; }
+      .point { display: flex; gap: 26px; align-items: flex-start; }
+      .badge { width: 66px; height: 66px; border-radius: 50%; background: var(--accent-deep); flex: none; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 700; }
+      .point b { display: block; font-size: 40px; font-weight: 700; line-height: 1.2; }
+      .point span { display: block; font-size: 30px; color: var(--muted); margin-top: 6px; }
+
+      /* S4 */
+      .hours { display: flex; gap: 34px; margin-top: 70px; align-items: stretch; }
+      .hour { flex: 1; background: var(--panel); border: 3px solid rgba(167, 243, 208, 0.25); border-radius: 30px; padding: 46px 40px; display: block; }
+      .hour .h { font-size: 34px; font-weight: 600; color: var(--muted); }
+      .hour .p { font-size: 132px; font-weight: 800; line-height: 1.1; margin-top: 14px; }
+      .hour .n { font-size: 30px; color: var(--muted); margin-top: 10px; }
+      .hour.hit { background: var(--amber); border-color: var(--amber); }
+      .hour.hit .h, .hour.hit .p, .hour.hit .n { color: #3b2602; }
+      .hour.total { background: var(--accent-deep); border-color: var(--accent); }
+      .hour.total .h, .hour.total .n { color: #d1fae5; }
+      .rule-line { font-size: 36px; color: var(--muted); margin-top: 54px; }
+
+      /* S5 */
+      .cards { display: flex; gap: 40px; margin-top: 60px; flex: 1; }
+      .card { flex: 1; display: flex; flex-direction: column; gap: 26px; }
+      .card .device { width: 100%; height: 470px; }
+      .card b { font-size: 42px; font-weight: 700; display: block; }
+      .card span { font-size: 30px; color: var(--muted); display: block; margin-top: -14px; }
+
+      /* S7 */
+      .oop { display: flex; gap: 34px; margin-top: 60px; }
+      .oop .item { flex: 1; background: var(--panel); border: 3px solid rgba(52, 211, 153, 0.35); border-radius: 30px; padding: 40px; display: block; }
+      .oop .kind { font-size: 28px; font-weight: 600; color: var(--amber); }
+      .oop .name { font-size: 54px; font-weight: 800; margin-top: 8px; }
+      .oop .why { font-size: 30px; color: var(--muted); margin-top: 14px; }
+      .lockup { margin-top: 70px; display: flex; align-items: baseline; gap: 40px; }
+      .lockup .big { font-size: 110px; font-weight: 800; color: var(--accent); line-height: 1; }
+      .lockup .small { font-size: 36px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="72" data-width="1920" data-height="1080">
+
+      <!-- พื้นหลังตลอดคลิป -->
+      <div id="bg" class="clip bg" data-layout-allow-overflow data-start="0" data-duration="72" data-track-index="0">
+        <div class="glow glow-a"></div>
+        <div class="glow glow-b"></div>
+        <svg class="court" viewBox="0 0 1340 610">
+          <path pathLength="1" d="M0 0 H1340 V610 H0 Z" />
+          <path pathLength="1" d="M0 46 H1340" />
+          <path pathLength="1" d="M0 564 H1340" />
+          <path pathLength="1" d="M670 0 V610" />
+          <path pathLength="1" d="M472 0 V610" />
+          <path pathLength="1" d="M868 0 V610" />
+          <path pathLength="1" d="M76 0 V610" />
+          <path pathLength="1" d="M1264 0 V610" />
+          <path pathLength="1" d="M0 305 H472" />
+          <path pathLength="1" d="M868 305 H1340" />
+        </svg>
+      </div>
+
+      <!-- 1 เปิดตัว -->
+      <section id="s1" class="clip scene" data-start="0" data-duration="8" data-track-index="1">
+        <div class="wrap">
+          <div class="logo" data-layout-allow-overflow>
+            <svg viewBox="0 0 24 24">
+              <g transform="rotate(-35 12 10)">
+                <path d="M5 2 H19 L14.5 14 H9.5 Z" fill="#ffffff" />
+                <path d="M9.6 2 L11 14 M14.4 2 L13 14 M6.6 6.5 H17.4 M8.2 10.5 H15.8" stroke="#10b981" stroke-width="0.9" fill="none" />
+                <path d="M9.5 14.6 H14.5 A2.5 2.5 0 0 1 9.5 14.6 Z" fill="#fbbf24" />
+              </g>
+            </svg>
+          </div>
+          <h1 id="s1-title">Badminton Club</h1>
+          <p class="lead" id="s1-lead">ระบบจองสนามแบดมินตัน สำหรับพนักงานแคชเชียร์และผู้ดูแลระบบ</p>
+          <div class="chips">
+            <span class="pill">Java 21</span>
+            <span class="pill">JavaFX</span>
+            <span class="pill">OOP</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 โจทย์ -->
+      <section id="s2" class="clip scene" data-start="7.4" data-duration="9.6" data-track-index="2">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>โจทย์</span>
+          <h2 data-layout-allow-overlap>ทุกกฎของสนาม อยู่ในระบบครบ</h2>
+          <div class="stats">
+            <div class="stat"><div class="num" id="n-courts">12</div><div class="label">สนาม</div><div class="note">ราคาชั่วโมงละ 180 บาท</div></div>
+            <div class="stat"><div class="num" id="n-open">13–21</div><div class="label">วันธรรมดา</div><div class="note">เสาร์–อาทิตย์และวันหยุด 10–20</div></div>
+            <div class="stat"><div class="num" id="n-pack">2,600</div><div class="label">แพกเกจ 15 ชม.</div><div class="note">บาท เหมาจ่าย</div></div>
+            <div class="stat"><div class="num amber" id="n-loyal">30%</div><div class="label">ชั่วโมงที่ 20</div><div class="note">จองครบ 19 ชม. จ่ายแค่ 30%</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 หน้าจอง -->
+      <section id="s3" class="clip scene" data-start="16.4" data-duration="12.6" data-track-index="1">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>แคชเชียร์ · จองสนาม</span>
+          <h2 data-layout-allow-overlap>เลือกสนามจากตาราง จองได้ในไม่กี่คลิก</h2>
+          <div class="split" style="margin-top: 44px">
+            <div class="device" data-layout-allow-overflow id="s3-device"><div class="zoom" id="s3-zoom"><img src="assets/img/02-booking.png" alt="หน้าจองสนาม" /></div></div>
+            <div class="points">
+              <div class="point" id="s3-p1"><div class="badge">1</div><div><b>คลิกช่องว่าง</b><span>คลิกต่อเพื่อขยายเวลา</span></div></div>
+              <div class="point" id="s3-p2"><div class="badge">2</div><div><b>รู้วันหยุดเอง</b><span>เวลาเปิด-ปิดเปลี่ยนตามวัน</span></div></div>
+              <div class="point" id="s3-p3"><div class="badge">3</div><div><b>ราคาขึ้นทันที</b><span>บอกว่าต้องแนบสลิปไหม</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 คิดราคา -->
+      <section id="s4" class="clip scene" data-start="28.4" data-duration="10.6" data-track-index="2">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>หัวใจของระบบ · ClubRules.quote()</span>
+          <h2 data-layout-allow-overlap>สะสมไว้ 18 ชม. จองเพิ่ม 3 ชม.</h2>
+          <div class="hours">
+            <div class="hour" id="h19"><div class="h">ชม.ที่ 19</div><div class="p">180</div><div class="n">ราคาปกติ</div></div>
+            <div class="hour hit" id="h20"><div class="h">ชม.ที่ 20</div><div class="p">54</div><div class="n">ลด 70%</div></div>
+            <div class="hour" id="h21"><div class="h">ชม.ที่ 21</div><div class="p">180</div><div class="n">ราคาปกติ</div></div>
+            <div class="hour total" id="htotal"><div class="h">ยอดชำระ</div><div class="p" id="n-total">414</div><div class="n">บาท</div></div>
+          </div>
+          <p class="rule-line" id="s4-rule">ใช้ชั่วโมงแพกเกจก่อน · ชั่วโมงเงินสดที่ 20, 40, 60 คิดเพียง 30%</p>
+        </div>
+      </section>
+
+      <!-- 5 หน้าจออื่น -->
+      <section id="s5" class="clip scene" data-start="38.4" data-duration="11.6" data-track-index="1">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>ครบทุกงานหน้าเคาน์เตอร์</span>
+          <h2 data-layout-allow-overlap>เช่า ขาย ค้นหา และดูแลสมาชิก</h2>
+          <div class="cards">
+            <div class="card" id="c1"><div class="device" data-layout-allow-overflow><div class="zoom" id="c1-zoom"><img src="assets/img/05-shop.png" alt="ร้านค้า" /></div></div><b>เช่า / ซื้ออุปกรณ์</b><span>ผู้เล่นทุกคนใช้ได้ ไม่ต้องเป็นสมาชิก</span></div>
+            <div class="card" id="c2"><div class="device" data-layout-allow-overflow><div class="zoom" id="c2-zoom"><img src="assets/img/03-search.png" alt="ค้นหาการจอง" /></div></div><b>ค้นหาการจอง</b><span>ชื่อ เบอร์ รหัส วันที่ สนาม</span></div>
+            <div class="card" id="c3"><div class="device" data-layout-allow-overflow><div class="zoom" id="c3-zoom"><img src="assets/img/04-members.png" alt="สมาชิก" /></div></div><b>สมาชิกและแพกเกจ</b><span>สมัคร ขายแพกเกจ ดูสิทธิ์ส่วนลด</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 แอดมิน -->
+      <section id="s6" class="clip scene" data-start="49.4" data-duration="10.6" data-track-index="2">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>ผู้ดูแลระบบ</span>
+          <h2 data-layout-allow-overlap>รายได้รายวัน รายเดือน แยกตามประเภท</h2>
+          <div class="split" style="margin-top: 44px">
+            <div class="device" data-layout-allow-overflow id="s6-device"><div class="zoom" id="s6-zoom"><img src="assets/img/06-revenue.png" alt="สรุปรายได้" /></div></div>
+            <div class="points">
+              <div class="point" id="s6-p1"><div class="badge">฿</div><div><b>รายงานรายได้</b><span>ค่าสนาม แพกเกจ เช่า และขาย</span></div></div>
+              <div class="point" id="s6-p2"><div class="badge">⌚</div><div><b>ประวัติสมาชิก</b><span>การจองทุกครั้งของแต่ละคน</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 OOP + ปิด -->
+      <section id="s7" class="clip scene" data-start="59.4" data-duration="12.6" data-track-index="1">
+        <div class="wrap">
+          <span class="eyebrow" data-layout-allow-overlap>ออกแบบด้วย OOP</span>
+          <h2 data-layout-allow-overlap>OOP ทุกตัวในระบบมีหน้าที่จริง</h2>
+          <div class="oop">
+            <div class="item" id="o1"><div class="kind">interface</div><div class="name">Billable</div><div class="why">รวมรายได้ทุกประเภทด้วยลูปเดียว</div></div>
+            <div class="item" id="o2"><div class="kind">abstract class</div><div class="name">User</div><div class="why">Cashier / Admin บอกเมนูของตัวเอง</div></div>
+            <div class="item" id="o3"><div class="kind">abstract class</div><div class="name">Page</div><div class="why">ทุกหน้าจอ refresh() แบบเดียวกัน</div></div>
+          </div>
+          <div class="lockup" id="lockup"><span class="big">ตรงโจทย์ 13/13 ข้อ</span><span class="small">Badminton Club · ทดสอบอัตโนมัติ 10 ข้อ</span></div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+      // ฉากเฟดเข้า/ออกที่ wrapper ด้านใน (ห้าม tween ตัว .clip เอง)
+      function sceneFade(id, start, dur, fadeIn = true) {
+        const w = $(`#${id} .wrap`);
+        if (fadeIn) tl.fromTo(w, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, start);
+        tl.to(w, { opacity: 0, duration: 0.6, ease: "power1.in" }, start + dur - 0.6);
+      }
+      function countUp(el, to, at, dur, format) {
+        const state = { v: 0 };
+        tl.to(state, { v: to, duration: dur, ease: "power2.out", onUpdate: () => { el.textContent = format(state.v); } }, at);
+      }
+
+      // ── พื้นหลังเคลื่อนไหวตลอดคลิป ──
+      tl.fromTo(".court path", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 2.4, ease: "power2.inOut", stagger: 0.12 }, 0.2);
+      tl.fromTo(".court", { rotation: -6, scale: 1.05 }, { rotation: 4, scale: 1.18, duration: 72, ease: "sine.inOut" }, 0);
+      tl.fromTo(".glow-a", { x: 0, y: 0, scale: 1 }, { x: 260, y: 120, scale: 1.25, duration: 72, ease: "sine.inOut" }, 0);
+      tl.fromTo(".glow-b", { x: 0, y: 0, scale: 1.1 }, { x: -320, y: -140, scale: 0.9, duration: 72, ease: "sine.inOut" }, 0);
+
+      // ── 1 เปิดตัว ──
+      sceneFade("s1", 0, 8, false);
+      tl.fromTo("#s1 .logo", { scale: 0.4, opacity: 0, rotation: -20 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: "back.out(2)" }, 0.6);
+      tl.fromTo("#s1-title", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, 1.0);
+      tl.fromTo("#s1-lead", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power2.out" }, 1.6);
+      tl.fromTo("#s1 .pill", { y: 30, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)", stagger: 0.15 }, 2.2);
+
+      // ── 2 โจทย์ ──
+      sceneFade("s2", 7.4, 9.6);
+      tl.fromTo("#s2 h2", { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 7.8);
+      tl.fromTo("#s2 .stat", { y: 90, opacity: 0, rotation: 2 }, { y: 0, opacity: 1, rotation: 0, duration: 0.7, ease: "power3.out", stagger: 0.18 }, 8.3);
+      countUp($("#n-courts"), 12, 8.4, 1.2, (v) => String(Math.round(v)));
+      countUp($("#n-pack"), 2600, 8.8, 1.4, (v) => Math.round(v).toLocaleString("en-US"));
+      countUp($("#n-loyal"), 30, 9.0, 1.2, (v) => Math.round(v) + "%");
+      tl.fromTo("#n-loyal", { scale: 1 }, { scale: 1.12, duration: 0.35, ease: "power2.out", yoyo: true, repeat: 1 }, 10.4);
+
+      // ── 3 หน้าจอง ──
+      sceneFade("s3", 16.4, 12.6);
+      tl.fromTo("#s3 h2", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 16.8);
+      tl.fromTo("#s3-device", { y: 140, opacity: 0, rotation: -2 }, { y: 0, opacity: 1, rotation: 0, duration: 1.0, ease: "expo.out" }, 17.2);
+      tl.fromTo("#s3-zoom", { scale: 1, xPercent: 0, yPercent: 0 }, { scale: 1.32, xPercent: 6, yPercent: 4, duration: 9, ease: "sine.inOut" }, 18.4);
+      ["#s3-p1", "#s3-p2", "#s3-p3"].forEach((p, i) => {
+        tl.fromTo(p, { x: 70, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 18.6 + i * 2.2);
+        tl.fromTo(`${p} .badge`, { scale: 0.3 }, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, 18.7 + i * 2.2);
+      });
+
+      // ── 4 คิดราคา ──
+      sceneFade("s4", 28.4, 10.6);
+      tl.fromTo("#s4 h2", { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 28.8);
+      ["#h19", "#h20", "#h21"].forEach((h, i) => {
+        tl.fromTo(h, { y: 80, opacity: 0, rotationX: -40 }, { y: 0, opacity: 1, rotationX: 0, duration: 0.7, ease: "power3.out" }, 29.5 + i * 0.7);
+      });
+      tl.to("#h20", { scale: 1.08, duration: 0.4, ease: "power2.out", yoyo: true, repeat: 1 }, 31.4);
+      tl.fromTo("#htotal", { x: 120, opacity: 0, scale: 0.9 }, { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.6)" }, 32.6);
+      countUp($("#n-total"), 414, 32.8, 1.6, (v) => String(Math.round(v)));
+      tl.fromTo("#s4-rule", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, 34.6);
+
+      // ── 5 หน้าจออื่น ──
+      sceneFade("s5", 38.4, 11.6);
+      tl.fromTo("#s5 h2", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 38.8);
+      ["#c1", "#c2", "#c3"].forEach((c, i) => {
+        tl.fromTo(c, { y: 120, opacity: 0, rotation: i === 1 ? 0 : (i === 0 ? -3 : 3) }, { y: 0, opacity: 1, rotation: 0, duration: 0.9, ease: "expo.out" }, 39.4 + i * 0.45);
+        tl.fromTo(`${c}-zoom`, { scale: 1.0, xPercent: 0 }, { scale: 1.22, xPercent: i % 2 ? -6 : 6, duration: 9, ease: "sine.inOut" }, 40.2);
+      });
+
+      // ── 6 แอดมิน ──
+      sceneFade("s6", 49.4, 10.6);
+      tl.fromTo("#s6 h2", { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 49.8);
+      tl.fromTo("#s6-device", { x: -160, opacity: 0 }, { x: 0, opacity: 1, duration: 1.0, ease: "expo.out" }, 50.2);
+      tl.fromTo("#s6-zoom", { scale: 1, xPercent: 0, yPercent: 0 }, { scale: 1.4, xPercent: -4, yPercent: 12, duration: 8, ease: "sine.inOut" }, 51.2);
+      tl.fromTo("#s6-p1", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 51.4);
+      tl.fromTo("#s6-p2", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 53.4);
+
+      // ── 7 OOP + ปิด ──
+      sceneFade("s7", 59.4, 12.6);
+      tl.fromTo("#s7 h2", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, 59.8);
+      ["#o1", "#o2", "#o3"].forEach((o, i) => {
+        tl.fromTo(o, { y: 90, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.4)" }, 60.5 + i * 0.5);
+      });
+      tl.fromTo("#lockup", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "expo.out" }, 63.6);
+      tl.fromTo("#lockup .big", { scale: 0.9 }, { scale: 1, duration: 1.2, ease: "elastic.out(1, 0.6)" }, 63.6);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

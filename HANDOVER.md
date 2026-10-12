@@ -15,7 +15,7 @@
 | 2 | IntelliJ รันเทสต์ไม่ผ่าน (`does not "opens"`) | เพิ่ม `opens ...service` ใน module-info |
 | 3 | ภาพสินค้า, ตรวจหาบัคแบบละเอียด, skills.md, HANDOVER, คู่มือติดตั้ง, ขึ้น GitHub | ภาพจาก Wikimedia, แก้บัค 15 ข้อ, run.bat, เอกสาร, push ไปที่ `badmintonoop` (ผู้ใช้ล็อกอิน GitHub เอง เพราะ credential เดิมในเครื่องเป็นบัญชีอื่นชื่อ PauloR777) |
 | 4 | แก้ดรอปดาวน์โปร่งใส, ถามเรื่อง role สมาชิก, ชื่อพนักงาน Jack/นุ | แก้ CSS ของ popup, เปลี่ยนชื่อ, เพิ่มวันหยุดจันทรคติปี 2569, ตอบว่าไม่ควรมี role สมาชิก (เหตุผลอยู่ด้านล่าง) |
-| 5 | บันทึก session นี้, ถามซ้ำเรื่อง "ผู้เล่นเช่า/ซื้อ" ควรเป็น role ไหม, ทำ **PPTX นำเสนอ**, **คลิป HyperFrames** และ **สคริปต์พูดอธิบายโค้ด (markdown)** | ✅ สคริปต์พูด `docs/สคริปต์นำเสนอ.md` · ✅ สไลด์ `docs/Badminton-Club-Presentation.pptx` 12 หน้า มีโน้ตผู้พูด (ซอร์ส `docs/slides-src/build.js` ใช้ pptxgenjs) · ⏳ คลิป HyperFrames (ผู้ใช้เลือก: โชว์แอป 60–90 วิ ไม่มีเสียงพูด, 16:9, ไม่ต้องดู storyboard, ทำอัตโนมัติ) |
+| 5 | บันทึก session นี้, ถามซ้ำเรื่อง "ผู้เล่นเช่า/ซื้อ" ควรเป็น role ไหม, ทำ **PPTX นำเสนอ**, **คลิป HyperFrames** และ **สคริปต์พูดอธิบายโค้ด (markdown)** | ✅ สคริปต์พูด `docs/สคริปต์นำเสนอ.md` · ✅ สไลด์ `docs/Badminton-Club-Presentation.pptx` 12 หน้า มีโน้ตผู้พูด (ซอร์ส `docs/slides-src/build.js` ใช้ pptxgenjs) · ✅ คลิป HyperFrames 72 วิ ไม่มีเสียงพูด อยู่ใน `video/` (`index.html`, `npx hyperframes check` ผ่าน, ฟอนต์ Prompt OFL) — ถ้ายังไม่มีไฟล์ `video/renders/*.mp4` ให้รัน `cd video && npm run render` |
 
 **เรื่อง role (ผู้ใช้ถามมา 2 ครั้ง ตอบให้ตรงกันทุกครั้ง):** บรีฟใช้คำ 3 คำแยกกันโดยตั้งใจ
 - **ผู้ใช้ระบบ** = แคชเชียร์ + ผู้ดูแลระบบ (คนที่ล็อกอิน คือ `User` → `Cashier`, `Admin`)
