@@ -30,6 +30,7 @@ class ClubTest {
         assertEquals(10, ClubRules.openHour(SATURDAY));
         assertEquals(20, ClubRules.closeHour(SATURDAY));
         assertEquals(10, ClubRules.openHour(CHULALONGKORN_DAY));
+        assertEquals(10, ClubRules.openHour(LocalDate.of(2026, 3, 3)), "มาฆบูชาเป็นวันหยุดตามจันทรคติ");
     }
 
     @Test

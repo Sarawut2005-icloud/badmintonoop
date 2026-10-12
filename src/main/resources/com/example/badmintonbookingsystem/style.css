@@ -108,8 +108,6 @@
 }
 .search-box .text-field { -fx-border-width: 0; -fx-background-color: transparent; }
 
-.combo-box-popup .list-view { -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: -line; }
-.combo-box-popup .list-cell:filled:hover, .combo-box-popup .list-cell:filled:selected { -fx-background-color: -primary-soft; -fx-text-fill: -ink; }
 
 /* ───────── ตาราง / รายการ ───────── */
 
@@ -141,6 +139,19 @@
 .list-cell { -fx-background-color: transparent; -fx-padding: 8 10; -fx-background-radius: 10; }
 .list-view .list-cell:filled:hover { -fx-background-color: #f8fafc; }
 .list-view .list-cell:filled:selected { -fx-background-color: -primary-soft; }
+
+/* รายการดรอปดาวน์ของ ComboBox ต้องทึบ — กฎ .list-view/.list-cell ด้านบนทำให้โปร่งใส (เคยเห็นตัวหนังสือด้านหลังทะลุ) */
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -line;
+    -fx-border-radius: 10;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.18), 18, 0, 0, 6);
+}
+.combo-box-popup .list-cell { -fx-background-color: white; -fx-text-fill: -ink; -fx-padding: 8 12; -fx-background-radius: 8; }
+.combo-box-popup .list-cell:filled:hover { -fx-background-color: #f0fdf9; }
+.combo-box-popup .list-cell:filled:selected { -fx-background-color: -primary-soft; -fx-font-weight: bold; }
 .list-name { -fx-font-weight: bold; }
 
 .scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 0; }

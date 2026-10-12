@@ -51,6 +51,7 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-25"
 | Maven 3.8 ใช้ surefire ตัวเก่าที่ไม่รู้จัก JUnit 5 | pom ล็อก `maven-surefire-plugin` เป็นเวอร์ชัน 3.2.5 แล้ว |
 | ไฟล์ `.bat` ที่มีภาษาไทยทำให้ cmd อ่านพัง | ข้อความใน `.bat` ใช้ภาษาอังกฤษเท่านั้น และไฟล์ต้องเป็น CRLF (กำหนดไว้ใน `.gitattributes`) |
 | `ScrollPane` / `TableView` มีพื้นหลังเทาจาก modena | ทำให้โปร่งใสไว้แล้วใน style.css |
+| ทำ `.list-view/.list-cell` โปร่งใสแล้วดรอปดาวน์ ComboBox โปร่งใสตามไปด้วย | กฎ `.combo-box-popup` ต้องอยู่ **หลัง** กฎ list ทั่วไป และตั้งพื้นขาว ตรวจด้วยการถ่ายภาพ PopupWindow |
 | ชื่อไทยขึ้นต้นด้วยสระหน้า (เ แ โ ใ ไ) ทำให้ตัวย่อใน avatar ผิด | `Ui.avatar` ข้ามสระหน้าให้แล้ว |
 
 ## 6. วิธีตรวจ UI โดยไม่ต้องเปิดแอปเอง

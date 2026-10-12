@@ -15,17 +15,26 @@ public final class ClubRules {
     public static final int LOYALTY_EVERY = 20;     // จองครบ 19 ชม. → ชั่วโมงที่ 20 ได้ลด
     public static final double LOYALTY_RATE = 0.30; // จ่ายเพียง 30% ของราคาปกติ
 
-    // shortcut: มีเฉพาะวันหยุดที่วันที่ตายตัว ไม่รวมวันหยุดตามจันทรคติ (มาฆบูชา ฯลฯ) — ถ้าต้องการครบให้แอดมินเพิ่มวันหยุดเองได้
+    // วันหยุดที่ตรงวันเดิมทุกปี
     private static final Set<MonthDay> HOLIDAYS = Set.of(
             MonthDay.of(1, 1), MonthDay.of(4, 6), MonthDay.of(4, 13), MonthDay.of(4, 14), MonthDay.of(4, 15),
             MonthDay.of(5, 1), MonthDay.of(5, 4), MonthDay.of(6, 3), MonthDay.of(7, 28), MonthDay.of(8, 12),
             MonthDay.of(10, 13), MonthDay.of(10, 23), MonthDay.of(12, 5), MonthDay.of(12, 10), MonthDay.of(12, 31));
 
+    // shortcut: วันหยุดตามจันทรคติและวันหยุดชดเชยเปลี่ยนทุกปี มีถึงปี 2569 (2026) — ขึ้นปีใหม่ให้เพิ่มตามประกาศ ครม.
+    private static final Set<LocalDate> YEARLY_HOLIDAYS = Set.of(
+            LocalDate.of(2026, 3, 3),   // มาฆบูชา
+            LocalDate.of(2026, 5, 31),  // วิสาขบูชา
+            LocalDate.of(2026, 6, 1),   // ชดเชยวิสาขบูชา
+            LocalDate.of(2026, 7, 29),  // อาสาฬหบูชา
+            LocalDate.of(2026, 7, 30),  // เข้าพรรษา
+            LocalDate.of(2026, 12, 7)); // ชดเชยวันพ่อแห่งชาติ (5 ธ.ค. ตรงวันเสาร์)
+
     private ClubRules() {
     }
 
     public static boolean isHoliday(LocalDate date) {
-        return HOLIDAYS.contains(MonthDay.from(date));
+        return HOLIDAYS.contains(MonthDay.from(date)) || YEARLY_HOLIDAYS.contains(date);
     }
 
     public static boolean isWeekend(LocalDate date) {

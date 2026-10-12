@@ -14,7 +14,7 @@ import static com.example.badmintonbookingsystem.model.ClubRules.*;
  */
 final class DemoData {
 
-    private static final String CASHIER = "ฝ้าย ใจดี";
+    private static final String CASHIER = "Jack";
 
     private DemoData() {
     }
@@ -22,7 +22,7 @@ final class DemoData {
     static Club create() {
         Club club = new Club();
         club.addUser(new Cashier("cashier", "1234", CASHIER));
-        club.addUser(new Admin("admin", "1234", "ปอ ผู้จัดการ"));
+        club.addUser(new Admin("admin", "1234", "นุ"));
 
         List<Member> members = List.of(
                 club.registerMember("สมชาย ตีไกล", "0812345678"),
