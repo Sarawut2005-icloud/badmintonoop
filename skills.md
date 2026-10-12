@@ -6,7 +6,7 @@
 ## 1. โปรเจกต์นี้คืออะไร
 งาน OOP ของมหาวิทยาลัย เป็นระบบจองสนามแบดมินตันแบบ GUI บน Windows ใช้ **Java 21 + JavaFX 21 + Maven** ไม่มีฐานข้อมูล
 - โจทย์ต้นฉบับอยู่ใน `สิ่งที่ต้องทำ.png` และ `markdown.txt` ส่วนตารางเทียบโจทย์กับโค้ดอยู่ใน `README.md`
-- เจ้าของงานต้องพรีเซ็นต์ และแชร์โค้ดให้เพื่อนผ่าน GitHub (public): https://github.com/Sarawut2005-icloud/BadmintonBookingSystem
+- เจ้าของงานต้องพรีเซ็นต์ และแชร์โค้ดให้เพื่อนผ่าน GitHub (public): https://github.com/Sarawut2005-icloud/badmintonoop
 
 ## 2. สถาปัตยกรรม (ห้ามทำลายการแบ่งชั้นนี้)
 ```

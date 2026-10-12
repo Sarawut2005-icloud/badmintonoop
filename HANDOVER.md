@@ -2,7 +2,7 @@
 
 > **AI / คนที่มาทำต่อ:** อ่าน `skills.md` ก่อน แล้วอ่านไฟล์นี้ จบงานทุกครั้งให้อัปเดตหัวข้อ "สถานะล่าสุด" และ "งานถัดไป" → `mvnw test` → commit → push
 
-- Repo: https://github.com/Sarawut2005-icloud/BadmintonBookingSystem (public)
+- Repo: https://github.com/Sarawut2005-icloud/badmintonoop (public)
 - อัปเดตล่าสุด: 13 ต.ค. 2569 (2026-10-13)
 
 ## สถานะล่าสุด ✅
