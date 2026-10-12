@@ -17,6 +17,9 @@ Java 21 · JavaFX 21 · Maven · ไม่ใช้ฐานข้อมูล�
 | [HANDOVER.md](HANDOVER.md) | สถานะล่าสุดและงานถัดไป (สำหรับคน/AI ที่มาทำต่อ) |
 | [skills.md](skills.md) | วิธีทำงานกับโค้ดนี้ สไตล์ และกับดักที่เคยเจอ |
 | [docs/IMAGE-CREDITS.md](docs/IMAGE-CREDITS.md) | ที่มาและลิขสิทธิ์ของภาพสินค้า |
+| [docs/สคริปต์นำเสนอ.md](docs/สคริปต์นำเสนอ.md) | สคริปต์พูด 10 นาที + ลำดับสาธิต + เตรียมตอบคำถาม |
+| `docs/Badminton-Club-Presentation.pptx` | สไลด์ 12 หน้า มีโน้ตผู้พูด |
+| `docs/Badminton-Club-Video.mp4` | คลิปโชว์แอป 72 วินาที (ซอร์ส HyperFrames ใน `video/`) |
 
 บัญชีทดลอง: `cashier / 1234` (แคชเชียร์ **Jack**) · `admin / 1234` (ผู้ดูแลระบบ **นุ**). ที่หน้าเข้าสู่ระบบมีปุ่มกดกรอกให้
 
