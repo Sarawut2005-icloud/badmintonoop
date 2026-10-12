@@ -1,0 +1,94 @@
+@startuml class-diagram-ui
+!pragma layout smetana
+skinparam defaultFontName "Leelawadee UI"
+skinparam defaultFontSize 13
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam nodesep 30
+skinparam ranksep 50
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #4F46E5
+  ArrowColor #475569
+  HeaderBackgroundColor #E0E7FF
+}
+skinparam package {
+  BackgroundColor #F8FAFC
+  BorderColor #CBD5E1
+}
+hide empty members
+
+title Class Diagram — ชั้นหน้าจอ (JavaFX UI)
+
+class "javafx.application.Application" as Application #F1F5F9
+class "javafx.scene.layout.VBox" as VBox #F1F5F9
+class "javafx.scene.layout.StackPane" as StackPane #F1F5F9
+class "javafx.scene.control.TableView<Booking>" as TableView #F1F5F9
+
+class App {
+  - club : Club
+  - scene : Scene
+  + start(stage : Stage)
+  - showLogin()
+  - showMain(user : User)
+}
+class Launcher {
+  + {static} main(args : String[])
+}
+
+package "ui" {
+  abstract class Page <<abstract>> {
+    # club : Club
+    # user : User
+    + {abstract} refresh()
+  }
+  class LoginView
+  class MainView {
+    - pages : Map<Menu, Page>
+    - show(menu : Menu)
+    - createPage(menu : Menu) : Page
+  }
+  class BookingPage {
+    - selCourt, selStart, selEnd : int
+    - buildGrid(date)
+    - select(court, hour)
+    - confirmBooking()
+  }
+  class SearchPage
+  class MemberPage
+  class ShopPage {
+    - cart : Map<Product, Integer>
+  }
+  class RevenuePage
+  class HistoryPage
+  class BookingTable
+  class Ui <<utility>> {
+    + {static} card(...) : VBox
+    + {static} column(title, value) : TableColumn
+    + {static} submit(owner, action) : boolean
+    + {static} toast(owner, message, ok)
+  }
+}
+
+Launcher ..> App : launch
+Application <|-- App
+App --> LoginView
+App --> MainView
+
+StackPane <|-- LoginView
+StackPane <|-- MainView
+VBox <|-- Page
+Page <|-- BookingPage
+Page <|-- SearchPage
+Page <|-- MemberPage
+Page <|-- ShopPage
+Page <|-- RevenuePage
+Page <|-- HistoryPage
+TableView <|-- BookingTable
+
+MainView "1" o-- "1..*" Page : สร้างตาม user.menus()
+SearchPage --> BookingTable
+HistoryPage --> BookingTable
+Page ..> Ui
+@enduml

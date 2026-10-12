@@ -1,0 +1,36 @@
+@startuml activity-pricing
+skinparam defaultFontName "Leelawadee UI"
+skinparam defaultFontSize 13
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor #ECFDF5
+  BorderColor #059669
+  DiamondBackgroundColor #FEF3C7
+  DiamondBorderColor #D97706
+  ArrowColor #334155
+}
+
+title Activity Diagram — การคิดราคาจองสนาม (ClubRules.quote)
+
+start
+:รับ สมาชิก และ จำนวนชั่วโมงที่จอง (N);
+:ชั่วโมงแพกเกจที่ใช้ = min(N, แพกเกจคงเหลือ);
+:ชั่วโมงเงินสด = N − ชั่วโมงแพกเกจ;
+while (ยังมีชั่วโมงเงินสดที่ยังไม่คิด?) is (ใช่)
+  :ลำดับชั่วโมงสะสม = ชม.เงินสดสะสมเดิม + ชั่วโมงนี้;
+  if (ลำดับหาร 20 ลงตัว?\n(ชั่วโมงที่ 20, 40, 60, ...)) then (ใช่)
+    #FEF3C7:คิด 30% ของ 180 = 54 บาท;
+  else (ไม่)
+    :คิดราคาปกติ 180 บาท;
+  endif
+endwhile (ไม่)
+:ยอดชำระ = ผลรวมชั่วโมงเงินสด\n(ชั่วโมงแพกเกจ = 0 บาท);
+if (ยอดชำระ > 0?) then (ใช่)
+  :ต้องแนบสลิปการชำระเงิน;
+else (ไม่)
+  :ไม่ต้องแนบสลิป\n(ใช้แพกเกจทั้งหมด);
+endif
+:บันทึกการจอง\nตัดชั่วโมงแพกเกจ + สะสมชั่วโมงเงินสด;
+stop
+@enduml

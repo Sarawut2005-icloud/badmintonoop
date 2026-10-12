@@ -1,0 +1,50 @@
+@startuml sequence-booking
+skinparam defaultFontName "Leelawadee UI"
+skinparam defaultFontSize 13
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundCorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #ECFDF5
+  ParticipantBorderColor #059669
+  LifeLineBorderColor #94A3B8
+  ArrowColor #334155
+  ActorBorderColor #059669
+}
+autonumber
+
+title Sequence Diagram — การจองสนาม
+
+actor "แคชเชียร์" as C
+participant "BookingPage" as P
+participant "Club" as Club
+participant "ClubRules" as R
+participant "Member" as M
+database "data/club.dat\n+ data/slips" as D
+
+C -> P : คลิกช่องว่างในตาราง (สนาม, ชั่วโมง)
+P -> Club : isFree(court, date, start, hours)
+Club --> P : true
+C -> P : เลือกสมาชิก
+P -> R : quote(member, hours)
+R --> P : Quote (แพกเกจ / ราคาปกติ / ลด 70%)
+P --> C : แสดงรายละเอียดราคา
+C -> P : แนบสลิป แล้วกด "ยืนยันการจอง"
+P -> Club : book(member, court, date, start, hours, slip, cashier)
+activate Club
+Club -> Club : ตรวจกฎ\n(เป็นสมาชิก · เวลาทำการ · สนามว่าง · มีสลิป)
+alt ผิดกฎข้อใดข้อหนึ่ง
+  Club --> P : IllegalArgumentException("เหตุผล")
+  P --> C : แจ้งเตือนสีแดง (toast)
+else ผ่านทุกข้อ
+  Club -> R : quote(member, hours)
+  R --> Club : Quote
+  Club -> D : คัดลอกไฟล์สลิป
+  Club -> M : charge(quote)\nตัดชม.แพกเกจ / สะสมชม.
+  Club -> Club : bookings.add(new Booking(...))
+  Club -> D : save()  (เขียนไฟล์ชั่วคราวแล้วค่อยแทนที่)
+  Club --> P : Booking
+  deactivate Club
+  P --> C : "จองสำเร็จ B00xxx" + ตารางอัปเดต
+end
+@enduml

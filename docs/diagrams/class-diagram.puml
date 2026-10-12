@@ -1,0 +1,183 @@
+@startuml class-diagram
+!pragma layout smetana
+skinparam defaultFontName "Leelawadee UI"
+skinparam defaultFontSize 13
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam roundCorner 10
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 50
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #047857
+  ArrowColor #475569
+  HeaderBackgroundColor #D1FAE5
+  AttributeFontColor #0F172A
+}
+skinparam package {
+  BackgroundColor #F8FAFC
+  BorderColor #CBD5E1
+  FontColor #334155
+}
+hide empty members
+
+title Class Diagram — ระบบจองสนามแบดมินตัน (model + service)
+
+package "model" {
+  interface Billable <<interface>> {
+    + paidOn() : LocalDate
+    + type() : RevenueType
+    + amount() : double
+  }
+
+  enum RevenueType {
+    COURT
+    PACKAGE
+    RENTAL
+    SALE
+  }
+
+  abstract class User <<abstract>> {
+    - username : String
+    - password : String
+    - displayName : String
+    + passwordMatches(input : String) : boolean
+    + {abstract} roleName() : String
+    + {abstract} menus() : List<Menu>
+  }
+
+  class Cashier {
+    + roleName() : String
+    + menus() : List<Menu>
+  }
+
+  class Admin {
+    + roleName() : String
+    + menus() : List<Menu>
+  }
+
+  enum Menu {
+    BOOKING
+    SEARCH
+    MEMBERS
+    SHOP
+    REVENUE
+    HISTORY
+  }
+
+  class Member {
+    - id : String
+    - name : String
+    - phone : String
+    - paidHours : int
+    - packageHours : int
+    + hoursUntilDiscount() : int
+    + addPackageHours(hours : int)
+    + charge(quote : Quote)
+  }
+
+  class Booking <<record>> {
+    id : String
+    court : int
+    date : LocalDate
+    startHour : int
+    hours : int
+    slip : String
+    recordedBy : String
+    createdAt : LocalDateTime
+    + endHour() : int
+    + overlaps(court, date, start, end) : boolean
+  }
+
+  class PackagePurchase <<record>> {
+    paidOn : LocalDate
+    recordedBy : String
+  }
+
+  class ShopSale <<record>> {
+    quantity : int
+    paidOn : LocalDate
+    recordedBy : String
+  }
+
+  enum Product {
+    SHOES_RENTAL
+    RACKET_RENTAL
+    SHUTTLECOCK
+    GRIP_TAPE
+    RACKET
+    --
+    - label : String
+    - price : double
+    - rental : boolean
+  }
+
+  class Quote <<record>> {
+    packageHours : int
+    fullHours : int
+    discountedHours : int
+    + amount() : double
+  }
+
+  class ClubRules <<utility>> {
+    + {static} COURTS = 12
+    + {static} HOURLY_RATE = 180
+    + {static} PACKAGE_HOURS = 15
+    + {static} PACKAGE_PRICE = 2600
+    + {static} LOYALTY_EVERY = 20
+    + {static} LOYALTY_RATE = 0.30
+    + {static} openHour(date) : int
+    + {static} closeHour(date) : int
+    + {static} quote(member, hours) : Quote
+  }
+}
+
+package "service" {
+  class Club {
+    - users : List<User>
+    - members : List<Member>
+    - bookings : List<Booking>
+    - packages : List<PackagePurchase>
+    - shopSales : List<ShopSale>
+    + {static} load(dataDir : Path) : Club
+    + save()
+    + login(username, password) : Optional<User>
+    + registerMember(name, phone) : Member
+    + buyPackage(member, cashier) : PackagePurchase
+    + book(member, court, date, start, hours, slip, cashier) : Booking
+    + search(text, date, court) : List<Booking>
+    + historyOf(member) : List<Booking>
+    + sell(cart, cashier) : double
+    + transactions() : List<Billable>
+    + revenue(from, to) : Map<RevenueType, Double>
+  }
+
+  class DemoData {
+    ~ {static} create() : Club
+  }
+}
+
+User <|-- Cashier
+User <|-- Admin
+User ..> Menu : เมนูที่ใช้ได้
+
+Billable <|.. Booking
+Billable <|.. PackagePurchase
+Billable <|.. ShopSale
+Billable ..> RevenueType
+
+Booking "0..*" --> "1" Member : จองโดย
+Booking *-- "1" Quote : ราคา
+PackagePurchase "0..*" --> "1" Member
+ShopSale "0..*" --> "1" Product
+ClubRules ..> Quote : สร้าง
+
+Club "1" o-- "0..*" User
+Club "1" o-- "0..*" Member
+Club "1" *-- "0..*" Booking
+Club "1" *-- "0..*" PackagePurchase
+Club "1" *-- "0..*" ShopSale
+Club ..> ClubRules : ใช้กฎ
+DemoData ..> Club : สร้างข้อมูลตัวอย่าง
+@enduml

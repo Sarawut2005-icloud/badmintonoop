@@ -1,0 +1,381 @@
+/* ธีม Badminton Club — สีหลักเขียวมรกต พื้นหลังสว่าง การ์ดขาวมุมโค้ง */
+
+.root {
+    -primary: #059669;
+    -primary-dark: #047857;
+    -primary-soft: #d1fae5;
+    -ink: #0f172a;
+    -muted: #64748b;
+    -line: #e2e8f0;
+    -canvas: #f1f5f3;
+    -indigo: #4f46e5;
+    -amber: #d97706;
+    -danger: #e11d48;
+
+    -fx-font-family: "Leelawadee UI";
+    -fx-font-size: 14px;
+    -fx-background-color: -canvas;
+    -fx-accent: -primary;
+    -fx-focus-color: -primary;
+    -fx-faint-focus-color: transparent;
+}
+
+.label { -fx-text-fill: -ink; }
+.icon { -fx-font-family: "Segoe MDL2 Assets"; -fx-font-size: 15px; -fx-text-fill: -muted; }
+.muted { -fx-text-fill: -muted; -fx-font-size: 12.5px; }
+.field-label { -fx-text-fill: -muted; -fx-font-size: 12.5px; -fx-font-weight: bold; -fx-padding: 4 0 0 0; }
+.error-text { -fx-text-fill: -danger; -fx-font-size: 12.5px; }
+
+/* ───────── การ์ด / ชิป / แท็ก ───────── */
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.07), 20, 0, 0, 4);
+}
+.card-title { -fx-font-size: 16px; -fx-font-weight: bold; -fx-graphic-text-gap: 10; }
+.card-title .icon { -fx-text-fill: -primary; }
+
+.chip {
+    -fx-background-color: white;
+    -fx-border-color: -line;
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 6 14;
+    -fx-font-size: 13px;
+    -fx-graphic-text-gap: 8;
+}
+.chip .icon { -fx-text-fill: -primary; }
+.chip-green { -fx-background-color: -primary-soft; -fx-border-color: transparent; -fx-text-fill: -primary-dark; -fx-font-weight: bold; }
+
+.tag { -fx-background-radius: 6; -fx-padding: 2 8; -fx-font-size: 12px; -fx-font-weight: bold; }
+.tag-green { -fx-background-color: -primary-soft; -fx-text-fill: -primary-dark; }
+.tag-amber { -fx-background-color: #fef3c7; -fx-text-fill: #92400e; }
+
+/* ───────── ปุ่ม ───────── */
+
+.btn {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-insets: 0;
+    -fx-padding: 10 18;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.btn-primary { -fx-background-color: -primary; -fx-text-fill: white; }
+.btn-primary .icon { -fx-text-fill: white; }
+.btn-primary:hover { -fx-background-color: -primary-dark; }
+.btn-ghost { -fx-background-color: white; -fx-border-color: -line; -fx-text-fill: -ink; }
+.btn-ghost:hover { -fx-background-color: #f8fafc; -fx-border-color: #cbd5e1; }
+.btn-ghost .icon { -fx-text-fill: -ink; }
+.btn-icon { -fx-padding: 9 11; }
+.btn-light { -fx-background-color: white; -fx-text-fill: -primary-dark; }
+.btn-light .icon { -fx-text-fill: -primary-dark; }
+.btn-light:hover { -fx-background-color: #ecfdf5; }
+.btn-link { -fx-background-color: transparent; -fx-text-fill: -indigo; -fx-padding: 2 4; -fx-font-size: 12.5px; }
+.btn-link .icon { -fx-text-fill: -indigo; -fx-font-size: 13px; }
+.btn-link:hover { -fx-underline: true; }
+.btn-chip { -fx-background-color: #f1f5f9; -fx-text-fill: -ink; -fx-background-radius: 999; -fx-padding: 6 14; -fx-font-weight: normal; -fx-font-size: 12.5px; }
+.btn-chip:hover { -fx-background-color: -primary-soft; }
+.btn:disabled { -fx-opacity: 0.45; }
+
+/* ───────── ช่องกรอกข้อมูล ───────── */
+
+.text-field, .password-field, .combo-box, .date-picker {
+    -fx-background-color: white;
+    -fx-border-color: -line;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-insets: 0;
+}
+.text-field, .password-field { -fx-padding: 9 12; }
+.text-field:focused, .password-field:focused, .combo-box:focused, .date-picker:focused { -fx-border-color: -primary; }
+.combo-box { -fx-padding: 1 4; }
+.combo-box .list-cell { -fx-padding: 7 8; -fx-text-fill: -ink; }
+.combo-box .arrow, .date-picker .arrow { -fx-background-color: -muted; }
+.combo-box .arrow-button, .date-picker .arrow-button { -fx-background-color: transparent; }
+.date-picker > .text-field { -fx-border-width: 0; -fx-background-color: transparent; -fx-padding: 9 4 9 12; }
+.date-picker { -fx-pref-width: 190; }
+
+.search-box {
+    -fx-background-color: white;
+    -fx-border-color: -line;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 0 0 0 12;
+}
+.search-box .text-field { -fx-border-width: 0; -fx-background-color: transparent; }
+
+.combo-box-popup .list-view { -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: -line; }
+.combo-box-popup .list-cell:filled:hover, .combo-box-popup .list-cell:filled:selected { -fx-background-color: -primary-soft; -fx-text-fill: -ink; }
+
+/* ───────── ตาราง / รายการ ───────── */
+
+.table-view, .list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view .column-header-background { -fx-background-color: #f8fafc; -fx-background-radius: 10; }
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-size: 40;
+    -fx-padding: 0 4;
+}
+.table-view .column-header .label { -fx-text-fill: -muted; -fx-font-size: 12.5px; -fx-font-weight: bold; -fx-alignment: center-left; }
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f1f5f9 transparent;
+    -fx-cell-size: 42;
+}
+.table-row-cell:hover { -fx-background-color: #f0fdf9; }
+.table-row-cell:selected { -fx-background-color: -primary-soft; }
+.table-row-cell:empty { -fx-background-color: transparent; -fx-border-color: transparent; }
+.table-cell { -fx-padding: 0 8; -fx-alignment: center-left; -fx-text-fill: -ink; }
+.table-row-cell:selected .table-cell { -fx-text-fill: -ink; }
+
+.list-cell { -fx-background-color: transparent; -fx-padding: 8 10; -fx-background-radius: 10; }
+.list-view .list-cell:filled:hover { -fx-background-color: #f8fafc; }
+.list-view .list-cell:filled:selected { -fx-background-color: -primary-soft; }
+.list-name { -fx-font-weight: bold; }
+
+.scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 0; }
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar .thumb { -fx-background-color: #cbd5e1; -fx-background-radius: 999; -fx-background-insets: 2; }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-padding: 0; -fx-background-color: transparent; }
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow { -fx-shape: " "; -fx-padding: 0; }
+.corner { -fx-background-color: transparent; }
+
+/* ───────── โครงหน้าหลัก ───────── */
+
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, #052e25, #064e3b);
+    -fx-padding: 26 16 18 16;
+    -fx-pref-width: 246;
+    -fx-min-width: 246;
+}
+.brand-name { -fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold; }
+.brand-sub { -fx-text-fill: #8fc9b5; -fx-font-size: 12px; }
+.nav-section { -fx-text-fill: #5f9c88; -fx-font-size: 11.5px; -fx-font-weight: bold; -fx-padding: 26 12 6 12; }
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-text-fill: #cde9df;
+    -fx-padding: 11 14;
+    -fx-alignment: center-left;
+    -fx-graphic-text-gap: 14;
+    -fx-cursor: hand;
+}
+.nav-button .icon { -fx-text-fill: #7fbfa9; -fx-font-size: 16px; }
+.nav-button:hover { -fx-background-color: rgba(255, 255, 255, 0.07); }
+.nav-button:selected {
+    -fx-background-color: -primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.45), 14, 0, 0, 4);
+}
+.nav-button:selected .icon { -fx-text-fill: white; }
+
+.profile { -fx-background-color: rgba(255, 255, 255, 0.06); -fx-background-radius: 14; -fx-padding: 10 10 10 12; }
+.profile-name { -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px; }
+.profile-role { -fx-text-fill: #8fc9b5; -fx-font-size: 11.5px; }
+.logout { -fx-background-color: transparent; -fx-border-color: transparent; }
+.logout .icon { -fx-text-fill: #8fc9b5; }
+.logout:hover { -fx-background-color: rgba(255, 255, 255, 0.1); }
+
+.logo { -fx-background-color: linear-gradient(to bottom right, #34d399, #047857); -fx-background-radius: 12; }
+.avatar { -fx-background-radius: 999; }
+.avatar-letter { -fx-text-fill: white; -fx-font-weight: bold; }
+
+.header { -fx-padding: 26 28 20 28; }
+.page-title { -fx-font-size: 25px; -fx-font-weight: bold; }
+.page-subtitle { -fx-text-fill: -muted; }
+.page { -fx-padding: 0 28 26 28; }
+
+/* ───────── หน้าเข้าสู่ระบบ ───────── */
+
+.login-bg { -fx-background-color: radial-gradient(center 30% 20%, radius 90%, #0d7a5b, #053d2f 55%, #021f18); }
+.login-card { -fx-background-color: white; -fx-background-radius: 26; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 50, 0, 0, 16); }
+.login-brand {
+    -fx-background-color: linear-gradient(to bottom right, #047857, #065f46 60%, #064e3b);
+    -fx-background-radius: 26 0 0 26;
+    -fx-padding: 40 36;
+    -fx-pref-width: 360;
+    -fx-pref-height: 480;
+}
+.login-brand-name { -fx-text-fill: white; -fx-font-size: 30px; -fx-font-weight: bold; }
+.login-brand-sub { -fx-text-fill: #a7f3d0; -fx-font-size: 15px; }
+.login-fact { -fx-text-fill: #d1fae5; -fx-font-size: 13px; -fx-graphic-text-gap: 12; }
+.login-fact .icon { -fx-text-fill: #6ee7b7; }
+.login-form { -fx-padding: 44 40; -fx-pref-width: 400; }
+.login-title { -fx-font-size: 28px; -fx-font-weight: bold; }
+.login-form .btn-primary { -fx-padding: 12 18; -fx-font-size: 15px; }
+
+/* ───────── หน้าจองสนาม ───────── */
+
+.grid-head { -fx-text-fill: -muted; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 0 0 2 2; }
+.court-label { -fx-font-weight: bold; -fx-font-size: 13px; }
+.court-grid { -fx-padding: 4 6 4 0; }
+
+.slot {
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #e2e8f0;
+    -fx-background-radius: 9;
+    -fx-border-radius: 9;
+    -fx-background-insets: 0;
+    -fx-cursor: hand;
+}
+.slot:hover { -fx-background-color: -primary-soft; -fx-border-color: -primary; }
+.slot-past {
+    -fx-background-color: linear-gradient(from 0px 0px to 7px 7px, repeat, #f1f5f9 50%, #e5eaf0 50%);
+    -fx-background-radius: 9;
+    -fx-background-insets: 0;
+    -fx-opacity: 1;
+}
+.selection-block {
+    -fx-background-color: linear-gradient(to right, #10b981, #059669);
+    -fx-background-radius: 9;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12.5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.4), 10, 0, 0, 3);
+}
+.booking-block {
+    -fx-background-color: -indigo, #eef2ff;
+    -fx-background-insets: 0, 0 0 0 4;
+    -fx-background-radius: 9, 0 9 9 0;
+    -fx-padding: 3 10;
+}
+.booking-name { -fx-text-fill: #3730a3; -fx-font-weight: bold; -fx-font-size: 12px; }
+.booking-meta { -fx-text-fill: #6366f1; -fx-font-size: 11px; }
+
+.legend-dot { -fx-min-width: 12; -fx-min-height: 12; -fx-max-width: 12; -fx-max-height: 12; -fx-background-radius: 4; }
+.slot-legend-free { -fx-background-color: #e2e8f0, #f8fafc; -fx-background-insets: 0, 1; -fx-background-radius: 4, 3; }
+.slot-legend-selected { -fx-background-color: -primary; }
+.slot-legend-booked { -fx-background-color: -indigo; }
+.slot-legend-past { -fx-background-color: linear-gradient(from 0px 0px to 4px 4px, repeat, #f1f5f9 50%, #d5dce4 50%); }
+
+.selection-box { -fx-background-color: #f8fafc; -fx-background-radius: 12; -fx-padding: 14; }
+.selection-title { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: -primary-dark; }
+.total-label { -fx-font-weight: bold; }
+.slip-hint { -fx-font-size: 12px; -fx-font-weight: bold; }
+.slip-hint-required { -fx-text-fill: -danger; }
+.slip-hint-ok { -fx-text-fill: -primary-dark; }
+.total-value { -fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: -primary-dark; }
+.slip-preview {
+    -fx-min-width: 60; -fx-min-height: 60; -fx-max-width: 60; -fx-max-height: 60;
+    -fx-background-color: #f1f5f9;
+    -fx-background-radius: 10;
+}
+
+/* ───────── สมาชิก / ร้านค้า / ประวัติ ───────── */
+
+.package-card {
+    -fx-background-color: linear-gradient(to bottom right, #10b981, #047857);
+    -fx-background-radius: 16;
+    -fx-padding: 22;
+    -fx-effect: dropshadow(gaussian, rgba(5, 150, 105, 0.35), 20, 0, 0, 6);
+}
+.package-caption { -fx-text-fill: #d1fae5; -fx-font-size: 13px; }
+.package-hours { -fx-text-fill: white; -fx-font-size: 30px; -fx-font-weight: bold; }
+.package-price { -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; }
+.package-note { -fx-text-fill: #a7f3d0; -fx-font-size: 12.5px; }
+
+.catalog { -fx-padding: 4 4 20 4; }
+.product-card { -fx-pref-width: 200; -fx-padding: 14; -fx-spacing: 10; }
+.photo-missing { -fx-background-color: #f1f5f9; -fx-background-radius: 12; }
+.product-name { -fx-font-size: 17px; -fx-font-weight: bold; }
+.product-price { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: -primary-dark; }
+.cart-name { -fx-font-weight: bold; }
+.cart-qty { -fx-font-weight: bold; -fx-min-width: 24; -fx-alignment: center; }
+
+.profile-card { -fx-padding: 20 24; }
+.profile-title { -fx-font-size: 20px; -fx-font-weight: bold; }
+.stat { -fx-background-color: #f8fafc; -fx-background-radius: 12; -fx-padding: 12 16; }
+.stat-value { -fx-font-size: 17px; -fx-font-weight: bold; }
+
+/* ───────── KPI / กราฟ ───────── */
+
+.kpi { -fx-padding: 18 20; }
+.kpi-value { -fx-font-size: 24px; -fx-font-weight: bold; }
+.icon-tile { -fx-min-width: 46; -fx-min-height: 46; -fx-max-width: 46; -fx-max-height: 46; -fx-background-radius: 14; }
+.icon-tile .icon { -fx-font-size: 19px; }
+.tone-green { -fx-background-color: #d1fae5; }
+.tone-green .icon { -fx-text-fill: #047857; }
+.tone-indigo { -fx-background-color: #e0e7ff; }
+.tone-indigo .icon { -fx-text-fill: #4338ca; }
+.tone-amber { -fx-background-color: #fef3c7; }
+.tone-amber .icon { -fx-text-fill: #b45309; }
+.tone-rose { -fx-background-color: #ffe4e6; }
+.tone-rose .icon { -fx-text-fill: #be123c; }
+
+.segment { -fx-background-color: #f1f5f9; -fx-background-radius: 10; -fx-padding: 4; }
+.segment .toggle-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-background-insets: 0;
+    -fx-padding: 6 16;
+    -fx-text-fill: -muted;
+    -fx-cursor: hand;
+}
+.segment .toggle-button:selected {
+    -fx-background-color: white;
+    -fx-text-fill: -ink;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.1), 6, 0, 0, 1);
+}
+
+.chart { -fx-padding: 4 0 0 0; -fx-pref-height: 280; }
+.chart-plot-background { -fx-background-color: transparent; }
+.chart-vertical-grid-lines { -fx-stroke: transparent; }
+.chart-horizontal-grid-lines { -fx-stroke: #eef2f7; }
+.chart-alternative-row-fill { -fx-fill: transparent; }
+.chart-vertical-zero-line, .chart-horizontal-zero-line { -fx-stroke: transparent; }
+.axis { -fx-tick-label-fill: -muted; -fx-tick-label-font-size: 11px; -fx-tick-mark-visible: false; -fx-minor-tick-visible: false; }
+.axis:bottom { -fx-border-color: -line transparent transparent transparent; }
+.axis:left { -fx-border-color: transparent; }
+.chart-legend { -fx-background-color: transparent; -fx-padding: 6 0 0 0; }
+.chart-legend-item { -fx-text-fill: -muted; -fx-font-size: 12px; }
+.chart-bar { -fx-background-radius: 3 3 0 0; }
+.chart-pie-label { -fx-fill: -muted; -fx-font-size: 12px; }
+.chart-pie { -fx-border-color: white; -fx-border-width: 2; }
+
+.default-color0.chart-bar, .default-color0.bar-legend-symbol { -fx-bar-fill: #059669; -fx-background-color: #059669; }
+.default-color1.chart-bar, .default-color1.bar-legend-symbol { -fx-bar-fill: #6366f1; -fx-background-color: #6366f1; }
+.default-color2.chart-bar, .default-color2.bar-legend-symbol { -fx-bar-fill: #f59e0b; -fx-background-color: #f59e0b; }
+.default-color3.chart-bar, .default-color3.bar-legend-symbol { -fx-bar-fill: #ec4899; -fx-background-color: #ec4899; }
+.default-color0.chart-pie { -fx-pie-color: #059669; }
+.default-color1.chart-pie { -fx-pie-color: #6366f1; }
+.default-color2.chart-pie { -fx-pie-color: #f59e0b; }
+.default-color3.chart-pie { -fx-pie-color: #ec4899; }
+
+/* ───────── แจ้งเตือน / หน้าต่างย่อย ───────── */
+
+.toast {
+    -fx-background-color: #0f172a;
+    -fx-background-radius: 12;
+    -fx-text-fill: white;
+    -fx-padding: 12 20;
+    -fx-graphic-text-gap: 10;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.35), 24, 0, 0, 8);
+}
+.toast-ok .icon { -fx-text-fill: #34d399; }
+.toast-error .icon { -fx-text-fill: #fb7185; }
+
+.image-viewer { -fx-background-color: #0f172a; -fx-padding: 16; }
+
+.dialog-pane { -fx-background-color: white; -fx-padding: 8; }
+.dialog-pane > .header-panel { -fx-background-color: white; }
+.dialog-pane > .header-panel .label { -fx-font-size: 16px; -fx-font-weight: bold; }
+.dialog-pane .button { -fx-background-radius: 10; -fx-padding: 8 18; -fx-cursor: hand; }
+.dialog-pane .button:default { -fx-background-color: -primary; -fx-text-fill: white; -fx-font-weight: bold; }
+
+.tooltip { -fx-background-color: #0f172a; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 12.5px; -fx-padding: 8 12; }
+.separator .line { -fx-border-color: -line; -fx-border-width: 1 0 0 0; }

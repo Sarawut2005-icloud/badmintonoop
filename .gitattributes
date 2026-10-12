@@ -1,0 +1,7 @@
+* text=auto
+# cmd.exe needs Windows line endings, otherwise the launcher breaks after cloning
+*.bat text eol=crlf
+*.cmd text eol=crlf
+mvnw text eol=lf
+*.png binary
+*.jpg binary

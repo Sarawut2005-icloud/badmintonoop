@@ -1,0 +1,51 @@
+@startuml use-case
+!pragma layout smetana
+skinparam defaultFontName "Leelawadee UI"
+skinparam defaultFontSize 14
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #ECFDF5
+  BorderColor #059669
+  ArrowColor #475569
+}
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #94A3B8
+}
+left to right direction
+
+title Use Case Diagram — ระบบจองสนามแบดมินตัน
+
+actor "พนักงานแคชเชียร์" as Cashier
+actor "ผู้ดูแลระบบ" as Admin
+
+rectangle "Badminton Booking System" {
+  usecase "เข้าสู่ระบบ" as UC0
+  usecase "จองสนาม\n(สนาม · วัน · เวลา)" as UC1
+  usecase "แนบสลิปการชำระเงิน" as UC2
+  usecase "คิดราคา\n(แพกเกจ / ชม.ที่ 20 ลด 70%)" as UC3
+  usecase "ค้นหาการจอง" as UC4
+  usecase "สมัครสมาชิก" as UC5
+  usecase "ขายแพกเกจ 15 ชม. 2,600 บาท" as UC6
+  usecase "เช่ารองเท้า / ไม้แบด\n50 บาท/ครั้ง/วัน" as UC7
+  usecase "ขายอุปกรณ์\n(ลูกขนไก่ เทปพันด้าม ไม้แบด)" as UC8
+  usecase "ดูประวัติการจองของสมาชิก" as UC9
+  usecase "ดูสรุปรายได้รายวัน / รายเดือน" as UC10
+}
+
+Cashier --> UC0
+Cashier --> UC1
+Cashier --> UC4
+Cashier --> UC5
+Cashier --> UC6
+Cashier --> UC7
+Cashier --> UC8
+Admin --> UC0
+Admin --> UC9
+Admin --> UC10
+
+UC1 ..> UC3 : <<include>>
+UC2 .> UC1 : <<extend>>\nเมื่อยอดชำระ > 0
+@enduml
