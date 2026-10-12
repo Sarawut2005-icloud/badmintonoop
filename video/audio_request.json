@@ -1,0 +1,17 @@
+{
+  "provider": "gemini",
+  "tts_model": "gemini-3.8-flash-tts",
+  "voice": "Charon",
+  "lang": "th",
+  "style": "Native Thai male university student presenting his own project to classmates and a teacher. Warm, polite, confident and relaxed, like talking to real people, not reading. Natural Thai intonation and rhythm, light smile in the voice, short natural pauses at commas. Pronounce English tech words (Java, JavaFX, OOP, interface, abstract class) the way Thai developers normally say them. Keep a steady, slightly brisk pace.",
+  "lines": [
+    { "id": "vo1", "text": "Badminton Club ระบบจองสนามแบดมินตัน เขียนด้วย Java กับ JavaFX และออกแบบด้วยหลัก OOP ครับ" },
+    { "id": "vo2", "text": "สนามมีสิบสองสนาม ชั่วโมงละร้อยแปดสิบบาท มีแพกเกจเหมาจ่าย และชั่วโมงที่ยี่สิบ จ่ายแค่สามสิบเปอร์เซ็นต์" },
+    { "id": "vo3", "text": "แคชเชียร์เลือกสนามจากตารางได้เลย ระบบรู้เองว่าวันนี้เป็นวันหยุดไหม แล้วคิดราคาให้ก่อนกดยืนยัน" },
+    { "id": "vo4", "text": "อย่างสมาชิกที่สะสมไว้สิบแปดชั่วโมง จองเพิ่มอีกสาม ชั่วโมงที่ยี่สิบจะลดเจ็ดสิบเปอร์เซ็นต์ รวมเป็นสี่ร้อยสิบสี่บาท" },
+    { "id": "vo5", "text": "นอกจากจองสนาม ยังเช่าขายอุปกรณ์ ค้นหาการจอง แล้วก็ดูแลสมาชิกได้ครบในที่เดียว" },
+    { "id": "vo6", "text": "ส่วนผู้ดูแลระบบ ดูรายได้รายวัน รายเดือน แยกตามประเภท พร้อมประวัติการจองของสมาชิกทุกคน" },
+    { "id": "vo7", "text": "ทุกส่วนใช้ OOP อย่างมีเหตุผล ทั้ง interface และ abstract class ตรงตามโจทย์ครบทุกข้อครับ" }
+  ],
+  "bgm": { "mode": "none" }
+}
